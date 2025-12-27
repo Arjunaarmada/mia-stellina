@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Pacifico&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+  overflow: hidden;
+}
+
+/* FLOATING HEARTS */
+.hearts::before {
+  content: "💖 💕 💗 💓 💞";
+  position: fixed;
+  left: 0;
+  bottom: -10%;
+  width: 100%;
+  font-size: 28px;
+  animation: floatHearts 15s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatHearts {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-120vh); }
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  max-width: 90%;
+  animation: heartbeat 2.5s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  color: #ff5f9e;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+button {
+  background: #ff5f9e;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff3f88;
+}
+
+.hidden { display: none; }
+
+/* 🌙 SECRET MESSAGE */
+.secret {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 182, 193, 0.25);
+  color: #ff4f8b;
+  font-style: italic;
+  cursor: pointer;
+  filter: blur(6px);
+  opacity: 0.6;
+  transition: all 0.6s ease;
+  user-select: none;
+}
+
+.secret.reveal {
+  filter: blur(0);
+  opacity: 1;
+}
+.card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: #ff9fc7;
+  border-radius: 10px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="hearts"></div>
+
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+  <h1>💌 A Letter For You</h1>
+  <p>
+    Cinta, Aku tuliskan warkah ini, jika nanti kau baca. Bacalah dengan hati yang mengebu-gebu. 
+    Cinta, aku sedang mengait aksara aksara dunia. Namun tiada yang menterjemahkan kiranamu. 
+    Aku memetik bintang bintang di langit namun tiada yang lebih bercahaya dari matamu. 
+    Sehingga luluh jiwaku menggagumi dirimu. Ingin saja aku mencuri dirimu bahkan jiwa ku telah kau regut dahulu. 
+    Oh. Begini rupanya dilamun cinta. Tapi cinta, kau adalah cenderawasih. Jauh dari dunia. Mana bisa aku gapai?. 
+    Cinta, satu permintaanku. Izinkan aku mencintaimu dalam hatiku… 🌸
+  </p>
+  <button onclick="openLetter()">Open Letter</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
+  <h1>Happy New Year, Cantik!!! 🎆</h1>
+  <p id="typewriter"></p>
+
+  <!-- SECRET MESSAGE -->
+  <div class="secret" onclick="revealSecret(this)">
+    Tap here… there’s something I never said 💗
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgm" loop muted>
+  <source src="Raissa-Anggiani.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// OPEN LETTER
+function openLetter() {
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+
+  const music = document.getElementById("bgm");
+  music.muted = false;
+  music.volume = 0.6;
+  music.play().catch(err => console.log("Music blocked:", err));
+
+  typeEffect();
+}
+
+// SPARKLE EFFECT
+document.addEventListener("click", function(e) {
+  const sparkle = document.createElement("div");
+  sparkle.innerHTML = "✨";
+  sparkle.style.position = "fixed";
+  sparkle.style.left = e.clientX + "px";
+  sparkle.style.top = e.clientY + "px";
+  sparkle.style.fontSize = "20px";
+  sparkle.style.pointerEvents = "none";
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+});
+
+// TYPEWRITER TEXT
+const text = `
+Hai Mia Stellina.
+Kau dah tahu belum kenapa aku panggil kau Mia Stellina?
+My little star — it sounds like home to me 💞
+Kalau nak tulis kenapa, mungkin panjang sangat. HAHAHAHA. 
+kena tulis dalam email. 
+Tapi aku nak kau tau; i see hope in you. 💞
+
+Hye i know i can't be like your ex, atau jadi best friend atau kawan kawan yang best kau pernah ada.. tapi aku cuba. aku tak nak janji, tapi aku cuba —ikut kemampuan aku. 
+So if you want to share with me, anything, apa apa je, sedih, marah, kecewa, happy aku cuba dengar.  mungkin aku tak pandai nak reply macam mana yg kau nak,
+tapi atleast you can show me how to do it. :/
+
+aku tak datang sebab aku perlukan sesuatu, jauh sekali meminta pulangan yg setimpal. aku datang semata ingin berkongsi rasa.
+jadi tak pelu terasa beban. ni bukan confess cintan cintun tau. 
+its just HAPPY NEW YEAR TO YOU!
+
+Semoga tahun ini yang baik-baik saja untuk kau.All the best in everything you do.
+Semoga berjaya dalam apa jua yang kau usahakan.Semoga Apa doa yang kau langitkan, Allah makbulkan.
+
+Aku selalu doakan yang terbaik untuk kau. Semoga kita dapat berjumpa… dan jumpa lagi.
+HAHAHAHA.
+— ADD Hensem 💕
+`;
+
+let i = 0;
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typewriter").innerText += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+
+// SECRET REVEAL
+function revealSecret(el) {
+  el.classList.add("reveal");
+  el.innerHTML = `
+  sorry kalau cringe and sorry sebab tulis panjang panjang.  💞
+  `;
+}
+</script>
+
+</body>
+</html>
